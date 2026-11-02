@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>จดหมายถึงศศิวิมล 🤍</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top, #fffdf7, transparent 60%),
+    linear-gradient(135deg, #f5eee2, #e9dfd0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: #786653;
+}
+
+.container {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 27px;
+  color: #9a8066;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  color: #b39a80;
+  font-size: 14px;
+}
+
+.scene {
+  height: 410px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.envelope {
+  position: relative;
+  width: 310px;
+  height: 205px;
+  background: #d9c7ad;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 20px 40px #8f765333;
+  transition: transform .5s;
+}
+
+.envelope:hover {
+  transform: translateY(-5px);
+}
+
+.back {
+  position: absolute;
+  inset: 0;
+  background: #e7d8c4;
+  border-radius: 5px;
+}
+
+.letter {
+  position: absolute;
+  width: 280px;
+  height: 180px;
+  left: 15px;
+  bottom: 10px;
+  background: #fffdf7;
+  border-radius: 4px;
+  padding: 25px 20px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: 2;
+  transition:
+    bottom 1.2s ease,
+    height 1s ease,
+    opacity .7s ease;
+  box-shadow: 0 3px 15px #8f765322;
+}
+
+.letter-content {
+  opacity: 0;
+  transition: opacity 1s ease 1s;
+}
+
+.letter h3 {
+  color: #a8896d;
+  margin-top: 5px;
+}
+
+.letter p {
+  line-height: 2;
+  font-size: 15px;
+  color: #806d59;
+}
+
+.front {
+  position: absolute;
+  inset: 0;
+  background: #dfceb6;
+  clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 100%, 0 100%);
+  z-index: 4;
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 155px solid transparent;
+  border-right: 155px solid transparent;
+  border-top: 115px solid #cbb69b;
+  transform-origin: top;
+  transition: transform .8s ease;
+  z-index: 5;
+}
+
+.seal {
+  position: absolute;
+  z-index: 6;
+  top: 85px;
+  left: 130px;
+  width: 50px;
+  height: 50px;
+  background: #b98f7a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  color: white;
+  transition: opacity .4s;
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope.open .seal {
+  opacity: 0;
+}
+
+.envelope.open .letter {
+  height: 360px;
+  bottom: 100px;
+  opacity: 1;
+  z-index: 3;
+  overflow-y: auto;
+}
+
+.envelope.open .letter-content {
+  opacity: 1;
+}
+
+.envelope.open {
+  cursor: default;
+}
+
+.hint {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #ae9479;
+}
+
+button {
+  padding: 12px 30px;
+  border: 1px solid #c7ac91;
+  border-radius: 30px;
+  background: #fffaf1;
+  color: #957b60;
+  font-size: 15px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+button:hover {
+  background: #e5d4be;
+  transform: scale(1.05);
+}
+
+.heart {
+  position: fixed;
+  bottom: -30px;
+  color: #c79b91;
+  pointer-events: none;
+  animation: float 7s linear forwards;
+  z-index: 10;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 0;
+  }
+  15% { opacity: .8; }
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media(max-width: 400px) {
+  .envelope {
+    width: 280px;
+  }
+
+  .flap {
+    border-left-width: 140px;
+    border-right-width: 140px;
+  }
+
+  .seal {
+    left: 115px;
+  }
+
+  .letter {
+    width: 250px;
+    left: 15px;
+  }
+
+  .envelope.open .letter {
+    height: 350px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h2>🤍 ถึงคุณศศิวิล เขียนงาม 🤍</h2>
+  <div class="subtitle">
+    จดหมายความในใจจาก นายธันยกานต์ รัตนะ
+  </div>
+
+  <div class="scene">
+
+    <div class="envelope" id="envelope">
+
+      <div class="back"></div>
+
+      <div class="letter">
+        <div class="letter-content">
+
+          <h3>ถึง คุณศศิวิมล เขียนงาม 🤍</h3>
+
+          <p>
+            เค้าอยากขอบคุณเธอมากๆนะที่เข้ามาเป็นคนที่ทำให้เค้ามีความสุขมากๆในปีนี้
+            เค้ารู้สึกว่าเค้าโชคดีมากๆที่ได้เจอเธอนะ
+            <br><br>
+
+            ขอบคุณที่เข้ามาเป็นส่วนหนึ่ง
+            ในชีวิตของเค้านะ
+            <br><br>
+
+            เธออาจไม่รู้ว่าการมีเธออยู่
+            ทำให้วันธรรมดาของเค้าพิเศษขึ้นแค่ไหน
+            <br><br>
+
+            ไม่รู้ว่าอนาคตเราจะเป็นยังไง
+            แต่เค้าอยากมีเธออยู่ในทุก ๆ วัน
+            และจะดูแลความรู้สึกของเธอให้ดีที่สุด
+            <br><br>
+
+            <strong>รักเธอมากนะ ❤️</strong>
+          </p>
+
+          <h3>จากคนที่รักเธอ 🤍</h3>
+
+        </div>
+      </div>
+
+      <div class="front"></div>
+      <div class="flap"></div>
+
+      <div class="seal">♥</div>
+
+    </div>
+  </div>
+
+  <div class="hint" id="hint">
+    แตะที่ซองจดหมายเพื่อเปิดอ่าน 💌
+  </div>
+
+  <button onclick="toggleLetter()" id="btn">
+    เปิดจดหมาย 🤍
+  </button>
+
+</div>
+
+<script>
+
+let isOpen = false;
+
+function toggleLetter() {
+
+  const envelope = document.getElementById("envelope");
+  const button = document.getElementById("btn");
+  const hint = document.getElementById("hint");
+
+  isOpen = !isOpen;
+
+  envelope.classList.toggle("open", isOpen);
+
+  button.innerHTML = isOpen
+    ? "ปิดจดหมาย 🤍"
+    : "เปิดจดหมาย 🤍";
+
+  hint.innerHTML = isOpen
+    ? "ข้อความเล็ก ๆ จากหัวใจของเรา"
+    : "แตะที่ซองจดหมายเพื่อเปิดอ่าน 💌";
+}
+
+// คลิกที่ซองเพื่อเปิดหรือปิด
+document.getElementById("envelope").addEventListener("click", () => {
+  toggleLetter();
+});
+
+// หัวใจลอย
+setInterval(() => {
+
+  const heart = document.createElement("div");
+
+  heart.className = "heart";
+  heart.innerHTML = Math.random() > 0.5 ? "♡" : "♥";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (15 + Math.random() * 20) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 7000);
+
+}, 900);
+
+</script>
+
+</body>
+</html>
